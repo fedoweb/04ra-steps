@@ -41,7 +41,7 @@ function Steps() {
            date.getFullYear() === year;
   };
 
-  // Преобразование даты в ISO формат для сортировки
+  // Преобразование даты для сортировки
   const parseDateToISO = (dateString) => {
     const parts = dateString.split('.');
     return new Date(parts[2], parts[1] - 1, parts[0]).toISOString().split('T')[0];
@@ -64,11 +64,11 @@ function Steps() {
     
     const dateISO = parseDateToISO(formData.date);
     
-    // Проверяем, есть ли уже тренировка с такой датой
+    // Проверяем дату
     const existingIndex = trainings.findIndex(t => t.date === dateISO);
     
     if (existingIndex !== -1) {
-      // Обновляем существующую запись - суммируем расстояния
+      // Обновляем существующую запись
       const updatedTrainings = [...trainings];
       updatedTrainings[existingIndex] = {
         ...updatedTrainings[existingIndex],
@@ -76,7 +76,7 @@ function Steps() {
         dateDisplay: formData.date
       };
       
-      // Сортируем по дате (от новых к старым)
+      // Сортируем по дате
       updatedTrainings.sort((a, b) => new Date(b.date) - new Date(a.date));
       setTrainings(updatedTrainings);
     } else {
@@ -89,7 +89,7 @@ function Steps() {
       };
       
       const updatedTrainings = [...trainings, newTraining];
-      // Сортируем по дате (от новых к старым)
+      // Сортируем по дате
       updatedTrainings.sort((a, b) => new Date(b.date) - new Date(a.date));
       setTrainings(updatedTrainings);
     }
